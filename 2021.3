@@ -1,0 +1,12 @@
+# test2021
+int main()
+{
+	int a, b, c;
+	int total;
+	scanf("%d%d%d", &a, &b, &c);
+	total = (b - a) / c;
+	if ((b - a) % c != 0)
+		total++;
+	printf("%d", total);
+	return 0;
+}
