@@ -1,0 +1,15 @@
+# test2021
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+/*
+- 200以内能被3整除.同时除以5的余数是1的所有正整数,要求输出这些数时中间以空格分隔
+*/
+int main()
+{
+	for (int i = 1; i <= 200; i++)
+	{
+		if (i % 3 == 0 && i % 5 == 1)
+			printf("%d ", i);
+	}
+	return 0;
+}
