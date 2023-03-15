@@ -1,0 +1,96 @@
+# test2021
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+#include<stdlib.h>
+
+#define N 5    //可将宏定义为想要的数
+struct phone
+{
+	char ID[10];
+	char model[12];
+	char brand[12];
+	float price;
+	int num;
+};
+void input(struct phone *p);
+void output1(struct phone *p);
+void output2(struct phone *p);
+
+/*
+11321 a111 xiaomi 4500 2000
+22221 a222 iphone 5000 6000
+33333 a333 rongyao 4000 4000
+44444 a444 yijia 3600 1000
+55555 a555 huawei 3300 8000
+*/
+int main()
+{
+	struct phone ph[N];
+	input(ph);
+	output1(ph);
+	output2(ph);
+	return 0;
+}
+void input(struct phone* p)
+/*
+- 实现从键盘输入30条手机销售信息
+*/
+{
+	int i;
+	for (i = 0; i < N; i++)
+	{
+		scanf("%s %s %s %f %d", &p[i].ID,&p[i].model,&p[i].brand,&p[i].price,&p[i].num);
+	}
+}
+
+void output1(struct phone* p)
+/*
+- 按照手机销售数量从高到低将所有手机销售信息进行排序,然后分行输出排序后的手机销售信息
+*/
+{
+	int i, j;
+	struct phone p1;
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N - i-1; j++)
+		{
+			if (p[j].num < p[j + 1].num)
+			{
+				p1 = p[j];
+				p[j] = p[j + 1];
+				p[j + 1] = p1;
+			}
+		}
+	}
+	for (i = 0; i < N; i++)
+	{
+		printf("%d %s %s %s %.2f\n", p[i].num, p[i].ID, p[i].model, p[i].brand, p[i].price);
+	}
+}
+
+void output2(struct phone* p)
+/*
+- 实现将销售价格低于平均销售价格的手机信息保存到当前文件夹下的"low_price.dat"文件中
+*/
+{
+	int i;
+	float average = 0;
+	for (i = 0; i < N; i++)
+	{
+		average += p[i].price;
+	}
+	FILE* fp = fopen("low_price.dat", "w");
+
+	if (NULL == fp)
+	{
+		printf("打开失败");
+	}
+	for (i = 0; i < N; i++)
+	{
+		if (p[i].price < average / N)
+			fprintf(fp, "%d %s %s %s %.2f\n", p[i].num, p[i].ID, p[i].model, p[i].brand, p[i].price);
+	}
+
+	fclose(fp);
+	fp = NULL;
+}
