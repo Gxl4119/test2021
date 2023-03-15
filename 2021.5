@@ -1,0 +1,52 @@
+# test2021
+/*
+- 打印点名册
+- 有3个班级,不超过100名同学,每个同学的信息包括学号,姓名,班级,请对所有同学按班级升序排序,班级相同的按学号升序排序,然后打印输出班级点名册
+*/
+#include<stdio.h>
+#define N 6
+struct student
+{
+	int num;
+	char name[20];
+	char ji[10];
+}stu[N];
+int main()
+{
+	int i, j;
+	struct student st;
+	struct student stu[N];
+	for (i = 0; i < N; i++) {
+		scanf("%d %s %s", &stu[i].num,&stu[i].name,&stu[i].ji);
+	}
+	
+	for (i = 0; i < N; i++)
+	{
+		for (j = 0; j < N - 1 - i; j++)
+		{
+			if (stu[j].ji[5] > stu[j + 1].ji[5])
+			{
+				st = stu[j];
+				stu[j] = stu[j + 1];
+				stu[j + 1] = st;
+			}
+			else if (stu[j].ji[5] == stu[j + 1].ji[5])
+			{
+				if (stu[j].num > stu[j + 1].num)
+				{
+					st = stu[j];
+					stu[j] = stu[j + 1];
+					stu[j + 1] = st;
+				}
+			}
+			else
+				continue;
+		}
+	}
+	for (i = 0; i < N; i++)
+	{
+		printf("%s %d %s \n", stu[i].ji, stu[i].num, stu[i].name);
+	}
+
+	return 0;
+}
