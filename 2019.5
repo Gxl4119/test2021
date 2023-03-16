@@ -1,0 +1,26 @@
+# test2021
+#include<stdio.h>
+
+/*
+- 验证身份证
+*/
+int main()
+{
+	char key;
+	int i, flg, total = 0;
+	int a[] = { 7,9,10,5,8,4,2,1,6,3,7,9,10,5,8,4,2};
+	char drr[] = { '1','0','x','9','8','7','6','5','4','3','2' };
+	char arr[20];
+	scanf("%s", &arr,20);
+	for (i = 0; i < 17; i++)
+	{
+		total += (arr[i]-'0') * a[i];
+	}
+	flg = total % 11;
+	key = drr[flg];
+	if (key == arr[17])
+		printf("正确");
+	else
+		printf("错误");
+	return 0;
+}
