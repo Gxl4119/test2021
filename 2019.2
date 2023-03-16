@@ -1,0 +1,24 @@
+# test2021
+#include<stdio.h>
+/*
+- 斐波那契数列
+*/
+int Func(int n);
+
+int main()
+{
+	int num, total;
+	printf("Please input a number:\n");
+	scanf("%d", &num);
+	total = Func(num);
+	printf("%d", total);
+	return 0;
+}
+
+int Func(int n) 
+{
+	if (1 == n || 2 == n)
+		return 1;
+	else
+		return Func(n - 1) + Func(n - 2);
+}
